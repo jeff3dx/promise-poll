@@ -4,11 +4,11 @@
  * @author jbutsch@netflix.com https://github.com/jeff3dx/promise-poll
  *
  * @param   {func}   targetPromiseFn - Your function that returns a Promise. Resolve falsy to poll again or truthy to finish
- * @param   {Number} intervalMs      - Wait time between polls
- * @param   {Number} timeoutMs       - Polling quits after this duration. Won't interupt the poll in progress.
- * @returns {Promise}                - The resulting Promise resolves when polling is finished
+ * @param   {Number} intervalMs      - Idle wait time between polls
+ * @param   {Number} timeoutMs       - Polling quits after this duration. Won't interupt a poll in progress.
+ * @returns {Promise}                - promisePoll returns a Promise that resolves when polling is done
  */
-function pollPromise(targetPromiseFn, intervalMs, timeoutMs) {
+function promisePoll(PromiseFn, intervalMs, timeoutMs) {
   var endTime = Date.now() + timeoutMs;
   return new Promise(function(resolve, reject) {
     _poll(targetPromiseFn, intervalMs, endTime, resolve);
@@ -22,17 +22,17 @@ function _poll(targetPromiseFn, intervalMs, endTime, resolve) {
     if (!!done) {
       resolve(done);
     } else if (Date.now() > endTime) {
-      console.log('pollPromise resolve on timeout');
+      console.log('promisePoll stopped polling on timeout');
       resolve(null);
     } else {
       setTimeout(pollagain, intervalMs);
     }
   })
   .catch(function(ex) {
-    resolve(null);
+    throw new Error('Error within promisePoll:' + ex);
   })
 }
 
 module.exports = {
-  pollPromise: pollPromise
+  promisePoll: promisePoll
 };
