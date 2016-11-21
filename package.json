@@ -1,0 +1,24 @@
+{
+  "name": "promise-poll",
+  "version": "1.0.0",
+  "description": "Poll an asynchronous operation that is itself a Promise.",
+  "main": "promise-poll.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeff3dx/promise-poll.git"
+  },
+  "keywords": [
+    "poll",
+    "asynchronous",
+    "promise"
+  ],
+  "author": "Jeff Butsch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeff3dx/promise-poll/issues"
+  },
+  "homepage": "https://github.com/jeff3dx/promise-poll#readme"
+}
