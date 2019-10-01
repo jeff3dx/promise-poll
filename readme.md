@@ -1,4 +1,4 @@
-#Promise Poll
+# Promise Poll
 It's easy to poll based on the result of a predicate function, but what about Promises?
 
 Promises return immediately and only "resolve" later. How can you poll a Promise operation without it returning immediately and end up with hundreds of unresolved Promises on the stack? Save time figuring this out by using promisePoll!
@@ -7,7 +7,7 @@ Promises return immediately and only "resolve" later. How can you poll a Promise
 	npm install https://github.com/jeff3dx/promise-poll --save
 
 
-##Usage
+## Usage
 	import { promisePoll } from 'promise-poll';
 	
 	promisePoll(targetPromiseFn, intervalMs, timeoutMs)
@@ -15,24 +15,24 @@ Promises return immediately and only "resolve" later. How can you poll a Promise
 	    // todo after polling stops 
 	  });
 
-####targetPromiseFn
+#### targetPromiseFn
 Function that returns a Promise. The Promise should perform your asynchronous operation (AJAX, etc.) and resolve either truthy or falsy.
 
 - If it resolves truthy polling will stop.
 - If it resolve falsy polling will continue.
 
-####intervalMs
+#### intervalMs
 Idle time to wait between each poll. Duration of the async operation itself is not counted.
 
-####timeoutMs
+#### timeoutMs
 Duration after which polling will stop regardless of the asynch operation result. Will not interupt a poll in progress.
 
-####return value
+#### return value
 Returns a Promise. When polling is done promisePoll will resolve itself with the data from the target promise.
 
 You can resolve complex data. Just resolve either your `data` (truthy ) or `null` (falsy).
 
-##Example
+## Example
 (see example.js):
 
 	import { promisePoll } from 'promise-poll';
